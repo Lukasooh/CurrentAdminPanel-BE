@@ -3,10 +3,10 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class UsersService {
     private users = [
-        { id: 1, name: 'John Doe', role: 'INTERN' },
-        { id: 2, name: 'Jane Smith', role: 'ENGINEER' },
-        { id: 3, name: 'Alice Johnson', role: 'ADMIN' },
-        { id: 4, name: 'Bob Brown', role: 'INTERN' },
+        { id: 1, name: 'John Doe', password: 'test', role: 'INTERN' },
+        { id: 2, name: 'Jane Smith', password: 'test', role: 'ENGINEER' },
+        { id: 3, name: 'Alice Johnson', password: 'test', role: 'ADMIN' },
+        { id: 4, name: 'Bob Brown', password: 'test', role: 'INTERN' },
     ]
     findAll(role?: 'INTERN' | 'ENGINEER' | 'ADMIN') {
         if (role) {
@@ -18,7 +18,7 @@ export class UsersService {
         return this.users.find(user => user.id === id);
     }   
 
-    create(user: { name: string; role: 'INTERN' | 'ENGINEER' | 'ADMIN' }) {
+    create(user: { name: string; password: 'test', role: 'INTERN' | 'ENGINEER' | 'ADMIN' }) {
         const newUser = { id: Date.now(), ...user };
         this.users.push(newUser);
         return newUser;

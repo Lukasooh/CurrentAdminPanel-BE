@@ -6,12 +6,15 @@ export class ItemsService {
   constructor(private readonly firebaseService: FirebaseService) {}
 
   private collection() {
-    return this.firebaseService.getCollection('items'); // Your dynamic collection
+    return this.firebaseService.getCollection('Users'); // Your dynamic collection
   }
 
   async create(data: any) {
-    const docRef = await this.collection().add(data);
-    return { id: docRef.id, ...data };
+    const email = data.email;
+    const docRef = this.collection().doc(email);
+    await docRef.set(data);
+    console.log('Document written with ID: ', email);
+    return { id: email, ...data };
   }
 
   async findAll() {
@@ -21,8 +24,18 @@ export class ItemsService {
 
   async findOne(id: string) {
     const doc = await this.collection().doc(id).get();
+    
+    console.log('Document data:', doc.data());
     if (!doc.exists) throw new NotFoundException('Item not found');
-    return { id: doc.id, ...doc.data() };
+    const data = doc.data();
+    const { email, firstName, lastName, password, } = data || {};
+    
+    return { id: doc.id,     
+      email,
+      firstName,
+      lastName,
+      password
+    };
   }
 
   async update(id: string, data: any) {

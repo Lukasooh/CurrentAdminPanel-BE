@@ -19,7 +19,7 @@ export class UsersController {
     
 
     @Post()
-    create(@Body() user: { name: string; role: 'INTERN' | 'ENGINEER' | 'ADMIN' }) {
+    create(@Body() user: { name: string; password:'test', role: 'INTERN' | 'ENGINEER' | 'ADMIN' }) {
         console.log(user);
         return this.usersService.create(user);
     }
