@@ -11,7 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { ItemsModule } from './items/items.module';
 
 @Module({
-  imports: [UsersModule, ConfigModule.forRoot({ cache: true }), FirebaseModule, PostsModule, AuthModule, ItemsModule],
+  imports: [UsersModule, ConfigModule.forRoot({ isGlobal: true, cache: true }), FirebaseModule, PostsModule, AuthModule, ItemsModule],
   controllers: [AppController, ItemsController],
   providers: [AppService, ItemsService],
 })

@@ -28,13 +28,14 @@ export class ItemsService {
     console.log('Document data:', doc.data());
     if (!doc.exists) throw new NotFoundException('Item not found');
     const data = doc.data();
-    const { email, firstName, lastName, password, } = data || {};
+    const { email, firstName, lastName, password, role} = data || {};
     
     return { id: doc.id,     
       email,
       firstName,
       lastName,
-      password
+      password,
+      role,
     };
   }
 

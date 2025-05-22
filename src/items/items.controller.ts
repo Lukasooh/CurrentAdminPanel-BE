@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ItemsService } from './items.service';
 
 @Controller('items')
@@ -26,6 +27,7 @@ export class ItemsController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard) 
   remove(@Param('id') id: string) {
     return this.itemsService.remove(id);
   }

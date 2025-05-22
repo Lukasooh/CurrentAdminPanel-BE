@@ -15,16 +15,21 @@ export class AuthService {
     email: string,
     pass: string
   ): Promise<{ access_token: string }> {
+    try {
     const user = await this.itemsService.findOne(email);
 
     if (user?.password !== pass) {
+      console.log('Invalid password');
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.email, email: user.email };
+    const payload = { role: user.role, email: user.email };
     // TODO: Generate a JWT and return it here
     // instead of the user object
     return { 
       access_token: await this.jwtService.signAsync(payload)
     };
-  }
+  }catch (error) {
+    console.error('Error during signIn:', error);
+    throw new UnauthorizedException('Invalid credentials');
+  }}
 }
