@@ -8,7 +8,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private configService: ConfigService) {
 
         const secret = configService.get<string>('JWT_SECRET');
-    console.log('JWT_SECRET from config:', secret); // 👈 Add this line
+    console.log('JWT_SECRET from config:', secret); 
     
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

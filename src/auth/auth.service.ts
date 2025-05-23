@@ -22,9 +22,10 @@ export class AuthService {
       console.log('Invalid password');
       throw new UnauthorizedException();
     }
+    console.log('Password is valid');
     const payload = { role: user.role, email: user.email };
-    // TODO: Generate a JWT and return it here
-    // instead of the user object
+    console.log('Payload:', payload);
+
     return { 
       access_token: await this.jwtService.signAsync(payload)
     };
